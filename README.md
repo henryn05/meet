@@ -1,5 +1,5 @@
-## User Stories
 
+## User Stories
 ### Scenario: Show/Hide Event Details
   Given the user is on the event details page
   When they click the "Show Details" button
@@ -33,8 +33,3 @@
   Given the user is on the main page
   When they apply a filter to show events in "New York"
   Then the app should display only events happening in New York
-
-## Technical Details
-
-### How Serverless Programming is Used in this Project
-  Serverless infrastructure will be used to connect the meet app with the Google Calendar API. Authorization of the user to access the API will also occur via serverless functions.
