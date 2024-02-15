@@ -20,12 +20,15 @@
 
     <main id="container">
       <h1>OAuth2 Test</h1>
+
+<!-- Step 1 -->
       <h4><b>Step 1:</b> Get the OAuth URL</h4>
       <p>Click the button below to get your OAuth URL.</p>
       <button id="getAuthUrlButton">Get OAuth URL</button>
       <p id="result"></p>
       <a id="authURL" href target="_blank">Click to authorize</a>
 
+<!-- Step 2 -->
       <h4>Step 2: Get your code and exchange for an access token</h4>
       <p>
         After you’re redirected back to your Meet app on GitHub, copy the code
@@ -38,13 +41,17 @@
       </label>
       <button id="getToken">Get Token</button>
       <p id="accessToken"></p>
+
+<!-- Step 3 -->
+
     </main>
     <script type="text/javascript">
-      // --------------------- STEP 1
+
+      // STEP 1
       const getAuthUrlButton = document.getElementById("getAuthUrlButton");
       const resultElement = document.getElementById("result");
       const resultLink = document.getElementById("authURL");
-      // Replace this with your own endpoint
+
       const getAuthURL = "https://werv5khit5.execute-api.us-east-1.amazonaws.com/dev/api/get-auth-url";
 
       getAuthUrlButton.onclick = function () {
@@ -61,9 +68,8 @@
             resultLink.href = authUrl;
           });
       };
-      // --------------------- END OF STEP 1
 
-      // --------------------- STEP 2
+      // STEP 2
       const codeValue = document.getElementById("code");
       const getAccessToken = document.getElementById("getToken");
       const accessTokenElement = document.getElementById("accessToken");
@@ -86,7 +92,7 @@
             accessTokenElement.innerText = JSON.stringify(json);
           });
       };
-      // --------------------- END OF STEP 2
+      // STEP 3
 
     </script>
   </body>
