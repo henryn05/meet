@@ -65,6 +65,10 @@ describe("<CitySearch /> component", () => {
 
     const cityTextBox = CitySearchComponent.queryByRole("textbox");
     await user.type(cityTextBox, "Berlin");
+
+    /* Once user types "Berlin" in the text box,
+    suggestion's text content should have "Berlin, Germany"
+    */
     const BerlinGermanySuggestion =
       CitySearchComponent.queryAllByRole("listitem")[0];
     await user.click(BerlinGermanySuggestion);

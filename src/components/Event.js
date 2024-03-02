@@ -4,38 +4,33 @@ import moment from "moment";
 const Event = ({ event }) => {
   const [showDetails, setShowDetails] = useState(false);
 
-  const toggleDetails = () => {
-    setShowDetails(!showDetails);
-  };
-
   return (
-    <li className="event">
-      {/*
-       *Checks if "event" object exists before displaying info
-       */}
+    <div className="event">
       <h1>{event && event.summary}</h1>
       <p>{event && event.location}</p>
-      {/*
-       *Uses moment.js to format "created" date
-       */}
       <p>{event && moment(event.created).format("MMMM Do YYYY, h:mm:ss a")}</p>
-
-      <button onClick={toggleDetails}>
+      {/*
+        Button starts by showing "Show Details" by default
+        but then when user clicks, it shows "Hide Details"
+      */}
+      {/*
+        Div remains hidden until "Show Details" button is
+        clicked and can be hidden afterwards when "Hide
+        Details" is clicked
+      */}
+      {showDetails && <div className="details"></div>}
+      <button
+        onClick={() => {showDetails ? setShowDetails(false) : setShowDetails(true)}}
+      >
         {/*
-         * Display text based on the 'showDetails' state.
-         * If 'showDetails' is true, display "Hide Details"; otherwise, display "Show Details".
-         */}
+          * Ternary operator checks if showDetails is true or
+            false
+          * If true, display "Hide Details", if false,
+            display "Show Details"
+        */}
         {showDetails ? "Hide Details" : "Show Details"}
       </button>
-      {/*
-      * Conditional rendering: Display additional details only if 'showDetails' state is true.
-      */}
-      {showDetails && (
-        <div>
-          <p>Event Details</p>
-        </div>
-      )}
-    </li>
+    </div>
   );
 };
 
