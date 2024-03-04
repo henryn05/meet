@@ -1,6 +1,6 @@
-import { render } from "@testing-library/react";
+import { render, waitFor } from "@testing-library/react";
 import { userEvent } from "@testing-library/user-event";
-import NumberOfEvents from "../NumberOfEvents";
+import NumberOfEvents from "../components/NumberOfEvents";
 
 describe("<NumberOfEvents /> component", () => {
   let NumberOfEventsComponent;
@@ -27,7 +27,10 @@ describe("<NumberOfEvents /> component", () => {
       "textbox"
     );
     const user = userEvent.setup();
+
     await user.type(textbox, "{backspace}{backspace}10");
-    expect(textbox).toBe("10");
+    await waitFor(() => {
+      expect(textbox).toHaveValue("10");
+    });
   });
 });

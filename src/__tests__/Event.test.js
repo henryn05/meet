@@ -1,13 +1,13 @@
-import { render } from "@testing-library/react";
+import { render, waitFor } from "@testing-library/react";
 import Event from "../components/Event";
-import userEvent from "@testing-library/user-event;
+import userEvent from "@testing-library/user-event";
 import { getEvents } from "../api";
 
 describe("<Event /> component", () => {
   let EventComponent;
   let allEvents;
 
-  beforeEach( async () => {
+  beforeEach(async () => {
     allEvents = await getEvents();
   });
 
@@ -16,15 +16,21 @@ describe("<Event /> component", () => {
   });
 
   test("Renders element for event's title", () => {
-    expect(EventComponent.queryByText(allEvents[0].summary)).toBeInTheDocument();
+    expect(
+      EventComponent.queryByText(allEvents[0].summary)
+    ).toBeInTheDocument();
   });
 
   test("Renders element for event's start time", () => {
-    expect(EventComponent.queryByText(allEvents[0].created)).toBeInTheDocument();
+    expect(
+      EventComponent.queryByText(allEvents[0].created)
+    ).toBeInTheDocument();
   });
 
   test("Renders element for event's location", () => {
-    expect(EventComponent.queryByText(allEvents[0].location)).toBeInTheDocument();
+    expect(
+      EventComponent.queryByText(allEvents[0].location)
+    ).toBeInTheDocument();
   });
 
   test("By default, event's details are hidden", () => {
@@ -36,8 +42,11 @@ describe("<Event /> component", () => {
     const button = EventComponent.queryByRole("button");
 
     await user.click(button, "Show Details");
-    expect(EventComponent.container.querySelector(
-      ".details")).toBeInTheDocument();
+    await waitFor(() => {
+      expect(
+        EventComponent.container.querySelector(".details")
+      ).toBeInTheDocument();
+    });
   });
 
   test("Hides details when user clicks on 'hide details' button", async () => {
@@ -45,7 +54,10 @@ describe("<Event /> component", () => {
     const button = EventComponent.queryByRole("button");
 
     await user.click(button, "Hide Details");
-    expect(EventComponent.container.querySelector(
-      ".details")).not.toBeInTheDocument();
+    await waitFor(() => {
+      expect(
+        EventComponent.container.querySelector(".details")
+      ).not.toBeInTheDocument();
+    });
   });
 });
