@@ -1,14 +1,13 @@
 import { useState } from "react";
-import moment from "moment";
 
 const Event = ({ event }) => {
   const [showDetails, setShowDetails] = useState(false);
 
   return (
-    <div className="event">
+    <li id="event">
       <h1>{event && event.summary}</h1>
       <p>{event && event.location}</p>
-      <p>{event && moment(event.created).format("MMMM Do YYYY, h:mm:ss a")}</p>
+      <p>{event && event.created}</p>
       {/*
         Button starts by showing "Show Details" by default
         but then when user clicks, it shows "Hide Details"
@@ -30,7 +29,7 @@ const Event = ({ event }) => {
         */}
         {showDetails ? "Hide Details" : "Show Details"}
       </button>
-    </div>
+    </li>
   );
 };
 

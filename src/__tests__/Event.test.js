@@ -9,9 +9,6 @@ describe("<Event /> component", () => {
 
   beforeEach(async () => {
     allEvents = await getEvents();
-  });
-
-  beforeEach(() => {
     EventComponent = render(<Event event={allEvents[0]} />);
   });
 
@@ -53,6 +50,7 @@ describe("<Event /> component", () => {
     const user = userEvent.setup();
     const button = EventComponent.queryByRole("button");
 
+    await user.click(button, "Show Details");
     await user.click(button, "Hide Details");
     await waitFor(() => {
       expect(
