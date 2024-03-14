@@ -23,11 +23,14 @@ const CitySearch = ({ allLocations }) => {
     // obtain value of city
     const value = event.target.textContent;
     setQuery(value);
-    setShowSuggestions(false);
+    setShowSuggestions(true);
   }
 
   return (
-    <div id="city-search">
+    <div id="city-search" data-testid="city-search">
+      {/*
+        Searchbar to find cities
+      */}
       <input
         class="city"
         type="text"
@@ -36,6 +39,10 @@ const CitySearch = ({ allLocations }) => {
         onFocus={() => setShowSuggestions(true)}
         onChange={handleInputChanged}
       />
+      {/*
+        * If showSuggestions is true, create unordered list of suggestions
+        * If not, return null (same thing as hiding the list)
+      */}
       {showSuggestions ?
         <ul className="suggestions">
           {suggestions.map((suggestion) => {

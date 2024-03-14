@@ -1,22 +1,23 @@
-import { render } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import EventList from "../components/EventList";
 import { getEvents } from "../api";
 
 describe("<EventList /> component", () => {
-  let EventListComponent;
-  beforeEach(() => {
-    EventListComponent = render(<EventList />);
+  test("Renders event component",  async () => {
+    const allEvents = await getEvents();
+    const event = allEvents[0];
+    render(<EventList events={[event]} />);
+    expect(screen.getByTestId(`event-${event.id}`)).toBeInTheDocument();
   });
 
   test("has element with 'list' role", () => {
-    expect(EventListComponent.queryByRole("list")).toBeInTheDocument();
+    render(<EventList />);
+    expect(screen.getByRole("list")).toBeInTheDocument();
   });
 
   test("Render correct # of events", async () => {
     const allEvents = await getEvents();
-    EventListComponent.rerender(<EventList events={allEvents} />);
-    expect(EventListComponent.getAllByRole("listitem")).toHaveLength(
-      allEvents.length
-    );
+    render(<EventList events={allEvents} />);
+    expect(screen.getAllByRole("listitem")).toHaveLength(allEvents.length);
   });
 });

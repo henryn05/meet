@@ -1,25 +1,19 @@
-import { render } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import App from "../App";
 
 describe("<App /> component", () => {
-  let AppDOM;
-  beforeEach(() => {
-    AppDOM = render(<App />).container.firstChild;
-  });
-
   test("Renders city search", () => {
-    expect(AppDOM.querySelector("#city-search")).toBeInTheDocument();
-  });
-
-  test("Renders event component", () => {
-    expect(AppDOM.querySelector("#event")).toBeInTheDocument();
+    render(<App />);
+    expect(screen.getByTestId("city-search")).toBeInTheDocument();
   });
 
   test("Renders list of events", () => {
-    expect(AppDOM.querySelector("#event-list")).toBeInTheDocument();
+    render(<App />);
+    expect(screen.getByTestId("event-list")).toBeInTheDocument();
   });
 
   test("Renders correct number of events", () => {
-    expect(AppDOM.querySelector("#number-of-events")).toBeInTheDocument();
+    render(<App />);
+    expect(screen.getByTestId("number-of-events")).toBeInTheDocument();
   });
 });

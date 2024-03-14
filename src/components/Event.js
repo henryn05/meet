@@ -4,7 +4,7 @@ const Event = ({ event }) => {
   const [showDetails, setShowDetails] = useState(false);
 
   return (
-    <li id="event">
+    <li id={`event-${event.id}`} data-testid={`event-${event.id}`}>
       <h1>{event && event.summary}</h1>
       <p>{event && event.location}</p>
       <p>{event && event.created}</p>
@@ -17,9 +17,13 @@ const Event = ({ event }) => {
         clicked and can be hidden afterwards when "Hide
         Details" is clicked
       */}
-      {showDetails && <div className="details"></div>}
+      {showDetails && (
+        <div className="details" data-testid="event-info-dialogue"></div>
+      )}
       <button
-        onClick={() => {showDetails ? setShowDetails(false) : setShowDetails(true)}}
+        onClick={() => {
+          showDetails ? setShowDetails(false) : setShowDetails(true);
+        }}
       >
         {/*
           * Ternary operator checks if showDetails is true or

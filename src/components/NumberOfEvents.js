@@ -13,7 +13,7 @@ const NumberOfEvents = () => {
   }
 
   return (
-    <div id="number-of-events">
+    <div id="number-of-events" data-testid="number-of-events">
       <input
         type="text"
         id="numberOfEventsInput"
