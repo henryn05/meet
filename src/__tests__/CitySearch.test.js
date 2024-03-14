@@ -13,18 +13,19 @@ describe("<CitySearch /> component", () => {
 
   test("Suggestion list is hidden by default", async () => {
     render(<CitySearch />);
-    const suggestionList = screen.queryByRole("List");
+    const suggestionList = screen.queryByRole("list");
     expect(suggestionList).not.toBeInTheDocument();
   });
 
   test("Renders list of suggestions when city textbox gains focus", async () => {
-    render(<CitySearch />);
     const user = userEvent.setup();
+    render(<CitySearch />);
     const cityTextBox = screen.queryByRole("textbox");
 
-    act( async () => {
+    act(async () => {
       await user.click(cityTextBox);
     });
+
     let suggestionList;
     await waitFor(() => {
       suggestionList = screen.queryByRole("list");
@@ -41,7 +42,7 @@ describe("<CitySearch /> component", () => {
 
     // User types Berlin in textbox
     const cityTextBox = screen.queryByRole("textbox");
-    act( async () => {
+    act(async () => {
       await user.type(cityTextBox, "Berlin");
     });
     await waitFor(() => {
@@ -70,12 +71,12 @@ describe("<CitySearch /> component", () => {
     render(<CitySearch allLocations={allLocations} />);
 
     const cityTextBox = screen.queryByRole("textbox");
-    act( async () => {
+    act(async () => {
       await user.type(cityTextBox, "Berlin");
     });
+
     await waitFor(async () => {
-      const BerlinGermanySuggestion = screen.queryAllByRole("listitem")[0];
-      console.log(screen.getAllByRole("listitem")[0]);
+      const BerlinGermanySuggestion = screen.queryAllByRole("listitem")[0]
       await user.click(BerlinGermanySuggestion);
       expect(cityTextBox).toHaveValue(BerlinGermanySuggestion.textContent);
     });

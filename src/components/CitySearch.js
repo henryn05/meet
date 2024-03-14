@@ -13,8 +13,8 @@ const CitySearch = ({ allLocations }) => {
       return location.toUpperCase().indexOf(value.toUpperCase()) > -1;
     }) : [];
 
-    // Set query local state to input value
-    // Set suggestions local state to filtered locations array
+    // set query local state to input value
+    // set suggestions local state to filtered locations array
     setQuery(value);
     setSuggestions(filteredLocations);
   };
@@ -32,7 +32,7 @@ const CitySearch = ({ allLocations }) => {
         Searchbar to find cities
       */}
       <input
-        class="city"
+        className="city"
         type="text"
         placeholder="City"
         value={query}
