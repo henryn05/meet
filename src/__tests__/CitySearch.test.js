@@ -21,10 +21,7 @@ describe("<CitySearch /> component", () => {
     const user = userEvent.setup();
     render(<CitySearch />);
     const cityTextBox = screen.queryByRole("textbox");
-
-    act(async () => {
-      await user.click(cityTextBox);
-    });
+    await user.click(cityTextBox);
 
     let suggestionList;
     await waitFor(() => {
@@ -42,7 +39,7 @@ describe("<CitySearch /> component", () => {
 
     // User types Berlin in textbox
     const cityTextBox = screen.queryByRole("textbox");
-    act(async () => {
+    await act(async () => {
       await user.type(cityTextBox, "Berlin");
     });
     await waitFor(() => {
@@ -70,15 +67,16 @@ describe("<CitySearch /> component", () => {
     const allLocations = extractLocations(allEvents);
     render(<CitySearch allLocations={allLocations} />);
 
-    const cityTextBox = screen.queryByRole("textbox");
-    act(async () => {
+    const cityTextBox = screen.queryByPlaceholderText("City");
+    await act(async () => {
       await user.type(cityTextBox, "Berlin");
     });
 
-    await waitFor(async () => {
-      const BerlinGermanySuggestion = screen.queryAllByRole("listitem")[0]
-      await user.click(BerlinGermanySuggestion);
-      expect(cityTextBox).toHaveValue(BerlinGermanySuggestion.textContent);
+    const BerlinSuggestion = screen.queryAllByRole("listitem")[0];
+    await act(async () => {
+      await user.click(BerlinSuggestion);
     });
+
+    expect(cityTextBox).toHaveValue(BerlinSuggestion.textContent);
   });
 });
