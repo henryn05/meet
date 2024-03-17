@@ -21,7 +21,9 @@ describe("<CitySearch /> component", () => {
     const user = userEvent.setup();
     render(<CitySearch />);
     const cityTextBox = screen.queryByRole("textbox");
-    await user.click(cityTextBox);
+    await act(async () => {
+      user.click(cityTextBox)
+    });
 
     let suggestionList;
     await waitFor(() => {
