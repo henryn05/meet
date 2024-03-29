@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const CitySearch = ({ allLocations }) => {
   const [showSuggestions, setShowSuggestions] = useState(false);
@@ -25,6 +25,10 @@ const CitySearch = ({ allLocations }) => {
     setQuery(value);
     setShowSuggestions(true);
   }
+
+  useEffect(() => {
+    setSuggestions(allLocations);
+  }, [`${allLocations}`]);
 
   return (
     <div id="city-search" data-testid="city-search">
@@ -53,7 +57,6 @@ const CitySearch = ({ allLocations }) => {
               {suggestion}
             </li>;
           })}
-          ;
           <li key="See all cities" onClick={handleItemClicked}>
             <b>See all cities</b>
           </li>
