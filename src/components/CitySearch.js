@@ -13,8 +13,8 @@ const CitySearch = ({ allLocations }) => {
       return location.toUpperCase().indexOf(value.toUpperCase()) > -1;
     }) : [];
 
-    // Set query local state to input value
-    // Set suggestions local state to filtered locations array
+    // set query local state to input value
+    // set suggestions local state to filtered locations array
     setQuery(value);
     setSuggestions(filteredLocations);
   };
@@ -23,19 +23,26 @@ const CitySearch = ({ allLocations }) => {
     // obtain value of city
     const value = event.target.textContent;
     setQuery(value);
-    setShowSuggestions(false);
+    setShowSuggestions(true);
   }
 
   return (
-    <div id="city-search">
+    <div id="city-search" data-testid="city-search">
+      {/*
+        Searchbar to find cities
+      */}
       <input
-        class="city"
+        className="city"
         type="text"
         placeholder="City"
         value={query}
         onFocus={() => setShowSuggestions(true)}
         onChange={handleInputChanged}
       />
+      {/*
+        * If showSuggestions is true, create unordered list of suggestions
+        * If not, return null (same thing as hiding the list)
+      */}
       {showSuggestions ?
         <ul className="suggestions">
           {suggestions.map((suggestion) => {
