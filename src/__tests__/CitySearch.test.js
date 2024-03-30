@@ -78,17 +78,16 @@ describe("<CitySearch /> component", () => {
     const user = userEvent.setup();
     const allEvents = await getEvents();
     const allLocations = extractLocations(allEvents);
-    render(<CitySearch allLocations={allLocations} />);
+    render(<CitySearch
+      allLocations={allLocations}
+      setCurrentCity={() => { }}
+    />);
 
     const cityTextBox = screen.queryByPlaceholderText("City");
-    await act(async () => {
-      await user.type(cityTextBox, "Berlin");
-    });
+    await user.type(cityTextBox, "Berlin");
 
     const BerlinSuggestion = screen.queryAllByRole("listitem")[0];
-    await act(async () => {
-      await user.click(BerlinSuggestion);
-    });
+    await user.click(BerlinSuggestion);
 
     expect(cityTextBox).toHaveValue(BerlinSuggestion.textContent);
   });
