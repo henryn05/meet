@@ -1,4 +1,4 @@
-import { render, waitFor, screen } from "@testing-library/react";
+import { render, waitFor, screen, within, act } from "@testing-library/react";
 import { userEvent } from "@testing-library/user-event";
 import NumberOfEvents from "../components/NumberOfEvents";
 
@@ -31,5 +31,22 @@ describe("<NumberOfEvents /> component", () => {
     await waitFor(() => {
       expect(textbox).toHaveValue("10");
     });
+  });
+});
+
+describe("<NumberOfEvents /> integration", () => {
+  test("Number of events match number inputted by user", async () => {
+    const user = userEvent.setup();
+    render(<NumberOfEvents />);
+
+    const AppDOM = screen.getByTestId("App");
+    const NumberOfEventsDOM = within(AppDOM).getByTestId("number-of-events");
+    const NumberOfEventsInput = within(NumberOfEventsDOM).queryByRole("textbox");
+
+    await act( async() => {
+      user.type(NumberOfEventsInput, "{backspace} {backspace} 10");
+    });
+
+    expect(NumberOfEventsInput.value).toBe("10");
   });
 });
