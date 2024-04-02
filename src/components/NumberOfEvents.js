@@ -13,6 +13,7 @@ const NumberOfEvents = ({ currentNOE, setCurrentNOE }) => {
         type="text"
         id="numberOfEventsInput"
         data-testid="numberOfEventsInput"
+        placeholder="Number of Suggestions"
         value={currentNOE}
         onChange={handleInputChange}
       />
