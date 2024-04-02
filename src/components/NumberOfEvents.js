@@ -1,15 +1,11 @@
-import { useState } from "react";
-
-const NumberOfEvents = (currentNOE, setCurrentNOE) => {
-
+const NumberOfEvents = ({ currentNOE, setCurrentNOE }) => {
   const handleInputChange = (event) => {
     if (!(event.target.value < 0)) {
       const newValue = event.target.value;
       setCurrentNOE(newValue);
       return;
     }
-  }
-
+  };
 
   return (
     <div id="number-of-events" data-testid="number-of-events">
@@ -17,11 +13,11 @@ const NumberOfEvents = (currentNOE, setCurrentNOE) => {
         type="text"
         id="numberOfEventsInput"
         data-testid="numberOfEventsInput"
-        value={10}
+        value={currentNOE}
         onChange={handleInputChange}
       />
     </div>
   );
 };
 
-export default NumberOfEvents
+export default NumberOfEvents;
