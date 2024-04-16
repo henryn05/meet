@@ -1,8 +1,8 @@
-import { Puppeteer } from "puppeteer";
+import puppeteer from "puppeteer";
 
 describe("show/hide event details", () => {
   test("An event element is collapsed by default", async () => {
-    const browser = await Puppeteer.launch();
+    const browser = await puppeteer.launch();
 
     const page = await browser.newPage();
     await page.goto("http://localhost:3030/");
