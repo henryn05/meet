@@ -5,7 +5,7 @@ describe("show/hide event details", () => {
     const browser = await puppeteer.launch();
 
     const page = await browser.newPage();
-    await page.goto("http://localhost:3030/");
+    await page.goto("http://localhost:3000/");
 
     await page.waitForSelector(".event");
     const eventDetails = await page.$(".event .details");
