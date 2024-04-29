@@ -8,7 +8,7 @@ import { getEvents } from "../api";
 
 const feature = loadFeature("./src/features/showHideAnEventsDetails.feature");
 
-defineFeature(feature, test => {
+defineFeature(feature, (test) => {
   test("When the details of an event are hidden by default", ({
     given,
     when,
@@ -18,7 +18,7 @@ defineFeature(feature, test => {
       render(<App />);
     });
 
-    when("the app displays a list of events", async() => {
+    when("the app displays a list of events", async () => {
       const AppDOM = screen.getByTestId("App");
       const EventListDOM = within(AppDOM).getByTestId("event-list");
       await waitFor(() => {
@@ -27,60 +27,61 @@ defineFeature(feature, test => {
       });
     });
 
-    then("details are hidden by default", () => {
-      const AppDOM = screen.getByTestId("App");
-      const eventDetails = within(AppDOM).getByClass("details");
+    then("the details are hidden by default", () => {
+      const eventDetails = screen.queryByTestId("event-info-dialogue");
       expect(eventDetails).not.toBeInTheDocument();
     });
   });
-  test("When user clicks on button to show details", ({
+  test("When the user clicks on button to show the details", ({
     given,
     when,
     then,
   }) => {
     let allEvents;
-    let EventComponent;
     given("an event has its details hidden", async () => {
       allEvents = await getEvents();
-      EventComponent = render(<Event event = {allEvents[0]} />);
-      expect(EventComponent.container.queryByClass("details")).not.toBeInTheDocument();
+      render(<Event event={allEvents[0]} />);
+      expect(
+        screen.queryByTestId("event-info-dialogue")
+      ).not.toBeInTheDocument();
     });
 
     when("the user clicks on the details button", async () => {
-      const showDetails = within(EventComponent).queryByText("Show Details");
+      const showDetails = screen.queryByText("Show Details");
       const user = userEvent.setup();
       await user.click(showDetails);
     });
 
-    then("details are shown", () => {
-      expect(EventComponent.getByClass("details")).toBeInTheDocument();
-      expect(within(EventComponent).getByText("Hide Details")).toBeInTheDocument();
+    then("the details are shown", () => {
+      expect(screen.getByTestId("event-info-dialogue")).toBeInTheDocument();
+      expect(screen.getByText("Hide Details")).toBeInTheDocument();
     });
   });
-  test("When user clicks on button to hide event details", ({
+  test("When the user clicks on button to hide the details", ({
     given,
     when,
     then,
   }) => {
-    let EventComponent;
     let allEvents;
     given("an event has its details shown", async () => {
       allEvents = await getEvents();
-      EventComponent = render(<Event event={allEvents[0]} />);
+      render(<Event event={allEvents[0]} />);
       const user = userEvent.setup();
-      await user.click(within(EventComponent).getByText("Show Details"));
-      expect(within(EventComponent).getByClass("details")).toBeInTheDocument();
+      await user.click(screen.getByTestId("details-btn"));
+      expect(screen.getByTestId("event-info-dialogue")).toBeInTheDocument();
     });
 
     when("the user clicks on the details button", async () => {
-      const hideDetails = within(EventComponent).getByText("Hide Details");
+      const hideDetails = screen.getByText("Hide Details");
       const user = userEvent.setup();
       await user.click(hideDetails);
     });
 
-    then("details are hidden", () => {
-      expect(within(EventComponent).queryByClass("details")).not.toBeInTheDocument();
-      expect(within(EventComponent).queryByText("Hide Details")).not.toBeInTheDocument();
+    then("the details are hidden", () => {
+      expect(
+        screen.queryByTestId("event-info-dialogue")
+      ).not.toBeInTheDocument();
+      expect(screen.queryByText("Hide Details")).not.toBeInTheDocument();
     });
   });
 });

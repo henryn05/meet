@@ -34,13 +34,13 @@ defineFeature(feature, (test) => {
     when,
     then,
   }) => {
-    given("the user specifies the number of events ", async () => {
-      const user = userEvent.setup();
+    given("the user specifies the number of events", async () => {
       render(<App />);
+      // const user = userEvent.setup();
       const AppDOM = screen.getByTestId("App");
-      const NumberOfEventsDOM = within(AppDOM).getByTestId("number-of-events");
-      const numberOfEventsInput = within(NumberOfEventsDOM).queryByRole("");
-      await user.type(numberOfEventsInput, "{backspace} {backspace} 10");
+      const NumberOfEventsDOM = within(AppDOM).getByTestId("numberOfEvents");
+      const numberOfEventsInput = within(NumberOfEventsDOM).getByTestId("numberOfEventsInput");
+      await userEvent.type(numberOfEventsInput, "{backspace}{backspace}10");
     });
 
     when("the user is on the main page", () => {
@@ -52,7 +52,7 @@ defineFeature(feature, (test) => {
     then("the app should display the specified number of events", () => {
       const AppDOM = screen.getByTestId("App");
       const EventListDOM = within(AppDOM).getByTestId("event-list");
-      const renderedListItems = within (EventListDOM).queryAllByRole("listitem");
+      const renderedListItems = within(EventListDOM).queryAllByRole("listitem");
       expect(renderedListItems.length).toEqual(10);
     });
   });

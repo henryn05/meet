@@ -13,6 +13,7 @@ const Event = ({ event }) => {
       )}
       <button
         className="details-btn"
+        data-testid="details-btn"
         onClick={() => {
           showDetails ? setShowDetails(false) : setShowDetails(true);
         }}

@@ -21,7 +21,7 @@ describe("<App /> component", () => {
 
   test("Renders correct number of events", () => {
     render(<NumberOfEvents />);
-    expect(screen.getByTestId("number-of-events")).toBeInTheDocument();
+    expect(screen.getByTestId("numberOfEvents")).toBeInTheDocument();
   });
 });
 
@@ -67,9 +67,8 @@ describe("<App /> integration", () => {
     render(<App />);
     const AppDOM = screen.getByTestId("App");
 
-    const NumberOfEventsDOM = within(AppDOM).queryByTestId("number-of-events");
-    const NumberOfEventsInput =
-      within(NumberOfEventsDOM).queryByRole("textbox");
+    const NumberOfEventsDOM = within(AppDOM).queryByTestId("numberOfEvents");
+    const NumberOfEventsInput = within(NumberOfEventsDOM).queryByRole("textbox");
 
     await userEvent.type(NumberOfEventsInput, "{backspace}{backspace}10");
 
