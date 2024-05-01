@@ -9,9 +9,11 @@ const CitySearch = ({ allLocations, setCurrentCity }) => {
     // obtain current value of input field
     const value = event.target.value;
     // filter allLocations array
-    const filteredLocations = allLocations ? allLocations.filter((location) => {
-      return location.toUpperCase().indexOf(value.toUpperCase()) > -1;
-    }) : [];
+    const filteredLocations = allLocations
+      ? allLocations.filter((location) => {
+          return location.toUpperCase().indexOf(value.toUpperCase()) > -1;
+        })
+      : [];
 
     // set query local state to input value
     // set suggestions local state to filtered locations array
@@ -25,7 +27,7 @@ const CitySearch = ({ allLocations, setCurrentCity }) => {
     setQuery(value);
     setShowSuggestions(false);
     setCurrentCity(value);
-  }
+  };
 
   useEffect(() => {
     setSuggestions(allLocations);
@@ -45,25 +47,25 @@ const CitySearch = ({ allLocations, setCurrentCity }) => {
         onChange={handleInputChanged}
       />
       {/*
-        * If showSuggestions is true, create unordered list of suggestions
-        * If not, return null (same thing as hiding the list)
-      */}
-      {showSuggestions ?
+       * If showSuggestions is true, create unordered list of suggestions
+       * If not, return null (same thing as hiding the list)
+       */}
+      {showSuggestions ? (
         <ul className="suggestions">
           {suggestions.map((suggestion) => {
-            return <li
-              key={suggestion}
-              onClick={handleItemClicked}
-            >
-              {suggestion}
-            </li>;
+            return (
+              <li key={suggestion} onClick={handleItemClicked}>
+                {suggestion}
+              </li>
+            );
           })}
           <li key="See all cities" onClick={handleItemClicked}>
             <b>See all cities</b>
           </li>
         </ul>
-        : null
-      }
+      ) : (
+        <div data-testid="test-div" />
+      )}
     </div>
   );
 };
