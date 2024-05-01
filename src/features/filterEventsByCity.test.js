@@ -8,10 +8,10 @@ const feature = loadFeature("./src/features/filterEventsByCity.feature");
 
 defineFeature(feature, test => {
   test("When user hasn't searched for a city, show upcoming events from all cities", ({
-    given,
-    when,
-    then,
-  }) => {
+      given,
+      when,
+      then,
+    }) => {
     given("user hasn't searched for any city", () => {});
 
     when("user opens the app", () => {
@@ -30,10 +30,10 @@ defineFeature(feature, test => {
   });
 
   test("User should see a list of suggestions when they search for a city", ({
-    given,
-    when,
-    then,
-  }) => {
+      given,
+      when,
+      then,
+    }) => {
     given("main page is open", () => {
       render(<App />);
     });
@@ -58,11 +58,11 @@ defineFeature(feature, test => {
   });
 
   test("User can select a city from the suggested list", ({
-    given,
-    and,
-    when,
-    then,
-  }) => {
+      given,
+      and,
+      when,
+      then,
+    }) => {
     let AppDOM;
     let CitySearchDOM;
     let citySearchInput;
@@ -97,12 +97,17 @@ defineFeature(feature, test => {
       }
     );
 
-    and("user should receive a list of upcoming events in that city", async () => {
-      const EventListDOM = within(AppDOM).getByTestId("event-list");
-      const EventListItems = within(EventListDOM).queryAllByRole("listitem");
-      const allEvents = await getEvents();
-      const berlinEvents = allEvents.filter(event => event.location === citySearchInput.value);
-      expect(EventListItems).toHaveLength(berlinEvents.length);
-    });
+    and(
+      "user should receive a list of upcoming events in that city",
+      async () => {
+        const EventListDOM = within(AppDOM).getByTestId("event-list");
+        const EventListItems = within(EventListDOM).queryAllByRole("listitem");
+        const allEvents = await getEvents();
+        const berlinEvents = allEvents.filter(
+          (event) => event.location === citySearchInput.value
+        );
+        expect(EventListItems).toHaveLength(berlinEvents.length);
+      }
+    );
   });
 });
