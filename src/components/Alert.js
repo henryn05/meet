@@ -9,16 +9,13 @@ class Alert extends Component {
 
   getStyle = () => {
     return {
-      color: this.color,
+      color: "white",
       backgroundColor: this.bgColor,
-      borderWidth: "2px",
-      borderStyle: "solid",
       fontWeight: "bolder",
-      borderRadius: "7px",
-      borderColor: this.color,
+      borderRadius: "4px",
       textAlign: "center",
       fontSize: "12px",
-      margin: "10px 0",
+      margin: "10px",
       padding: "10px",
     };
   };
@@ -35,23 +32,22 @@ class Alert extends Component {
 class InfoAlert extends Alert {
   constructor(props) {
     super(props);
-    this.color = "rgb(0, 0, 255)";
-    this.bgColor = "rgb(220, 220, 255)"
+    this.bgColor = "rgb(0, 128, 255)";
   }
 }
 
 class WarningAlert extends Alert {
   constructor(props) {
     super(props);
-    this.color = "orange";
+    this.bgColor = "rgb(255, 255, 0)";
   }
 }
 
 class ErrorAlert extends Alert {
   constructor(props) {
     super(props);
-    this.color = "red";
+    this.bgColor = "rgb(255, 0, 0)";
   }
 }
 
-export { InfoAlert };
+export {InfoAlert, ErrorAlert};

@@ -14,13 +14,17 @@ describe("<NumberOfEvents /> component", () => {
     render(<NumberOfEvents
       setCurrentNOE={() => {}}
       currentNOE={32}
+      setErrorAlert={() => {}}
     />);
     const textbox = screen.queryByRole("textbox");
     expect(textbox).toHaveValue("32");
   });
 
   test("Value of textbox changes accordingly when a user types", async () => {
-    render(<NumberOfEvents setCurrentNOE={() => {}} />);
+    render(<NumberOfEvents
+      setCurrentNOE={() => {}}
+      setErrorAlert={() => {}}
+    />);
     const textbox = screen.queryByRole("textbox");
     const user = userEvent.setup();
 
