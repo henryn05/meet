@@ -10,7 +10,10 @@ describe("<CitySearch /> component", () => {
     const events = await getEvents();
     const allLocations = extractLocations(events);
 
-    render(<CitySearch allLocations={allLocations}/>);
+    render(<CitySearch
+      allLocations={allLocations}
+      setInfoAlert={() => {}}
+    />);
     const cityTextBox = screen.queryByRole("textbox");
     expect(cityTextBox).toBeInTheDocument();
     expect(cityTextBox).toHaveClass("city");
@@ -20,7 +23,10 @@ describe("<CitySearch /> component", () => {
     const events = await getEvents();
     const allLocations = extractLocations(events);
 
-    render(<CitySearch allLocations={allLocations}/>);
+    render(<CitySearch
+      allLocations={allLocations}
+      setInfoAlert={() => {}}
+    />);
     const suggestionList = screen.queryByRole("list");
     expect(suggestionList).not.toBeInTheDocument();
   });
@@ -30,7 +36,10 @@ describe("<CitySearch /> component", () => {
     const allLocations = extractLocations(events);
     const user = userEvent.setup();
 
-    render(<CitySearch allLocations={allLocations}/>);
+    render(<CitySearch
+      allLocations={allLocations}
+      setInfoAlert={() => {}}
+    />);
     const cityTextBox = screen.queryByRole("textbox");
     await act(async () => {
       user.click(cityTextBox);
@@ -48,7 +57,10 @@ describe("<CitySearch /> component", () => {
     const user = userEvent.setup();
     const allEvents = await getEvents();
     const allLocations = extractLocations(allEvents);
-    render(<CitySearch allLocations={allLocations} />);
+    render(<CitySearch
+      allLocations={allLocations}
+      setInfoAlert={() => {}}
+    />);
 
     // User types Berlin in textbox
     const cityTextBox = screen.queryByRole("textbox");
@@ -78,10 +90,13 @@ describe("<CitySearch /> component", () => {
     const user = userEvent.setup();
     const allEvents = await getEvents();
     const allLocations = extractLocations(allEvents);
-    render(<CitySearch
-      allLocations={allLocations}
-      setCurrentCity={() => { }}
-    />);
+    render(
+      <CitySearch
+        allLocations={allLocations}
+        setCurrentCity={() => {}}
+        setInfoAlert={() => {}}
+      />
+    );
 
     const cityTextBox = screen.queryByPlaceholderText("City");
     await user.type(cityTextBox, "Berlin");
