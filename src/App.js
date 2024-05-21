@@ -5,7 +5,7 @@ import NumberOfEvents from "./components/NumberOfEvents";
 import { useState, useEffect } from "react";
 import { extractLocations, getEvents } from "./api";
 
-import { InfoAlert, ErrorAlert } from "./components/Alert";
+import { InfoAlert, WarningAlert, ErrorAlert } from "./components/Alert";
 
 import "./App.css";
 
@@ -15,6 +15,7 @@ const App = () => {
   const [events, setEvents] = useState([]);
   const [currentCity, setCurrentCity] = useState("See all cities");
   const [infoAlert, setInfoAlert] = useState("");
+  const [warningAlert, setWarningAlert] = useState("");
   const [errorAlert, setErrorAlert] = useState("");
 
   const fetchData = async () => {
@@ -28,17 +29,24 @@ const App = () => {
   };
 
   useEffect(() => {
+    let warningText;
+    if (navigator.onLine) {
+      warningText = "Because you're offline, the displayed has been loaded from cache"
+    } else {
+      warningText = ""
+    }
+    setWarningAlert(warningText);
     fetchData()
   }, [currentCity, currentNOE]);
 
   return (
     <div className="App" data-testid="App">
       <div className="alerts-container">
-        {infoAlert.length ? <InfoAlert text={infoAlert}/>
-        : null}
+        {infoAlert.length ? <InfoAlert text={infoAlert} /> : null}
 
-        {errorAlert.length ? <ErrorAlert text={errorAlert}/>
-        : null}
+        {warningAlert.length ? <warningAlert text={warningAlert} /> : null}
+
+        {errorAlert.length ? <ErrorAlert text={errorAlert} /> : null}
       </div>
       <CitySearch
         allLocations={allLocations}
