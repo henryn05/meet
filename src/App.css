@@ -59,7 +59,7 @@ input[type="number"] {
 }
 
 .suggestions > li:hover {
-  background-color: rgb(25, 145, 60);
+  background-color: #0CC0DF;
   color: white;
 }
 
@@ -81,7 +81,7 @@ input[type="number"] {
 }
 
 .details-btn {
-  background-color: rgb(25, 145,60);
+  background-color: #000000;
   color: white;
   position: absolute;
   right: 5px;
@@ -91,4 +91,7 @@ input[type="number"] {
   border-radius: 4px;
   outline: none;
   cursor: pointer;
+}
+.details-btn:hover {
+  background-color: #0CC0DF;
 }
