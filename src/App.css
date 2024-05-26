@@ -81,7 +81,7 @@ input[type="number"] {
 }
 
 .details-btn {
-  background-color: #000000;
+  background-color: #ccc;
   color: white;
   position: absolute;
   right: 5px;
