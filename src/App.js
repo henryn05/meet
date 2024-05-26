@@ -31,9 +31,9 @@ const App = () => {
   useEffect(() => {
     let warningText;
     if (navigator.onLine) {
-      warningText = "Because you're offline, the displayed has been loaded from cache"
-    } else {
       warningText = ""
+    } else {
+      warningText = "Because you're offline, the displayed has been loaded from cache";
     }
     setWarningAlert(warningText);
     fetchData()
@@ -44,7 +44,7 @@ const App = () => {
       <div className="alerts-container">
         {infoAlert.length ? <InfoAlert text={infoAlert} /> : null}
 
-        {warningAlert.length ? <warningAlert text={warningAlert} /> : null}
+        {warningAlert.length ? <WarningAlert text={warningAlert} /> : null}
 
         {errorAlert.length ? <ErrorAlert text={errorAlert} /> : null}
       </div>
