@@ -1,6 +1,7 @@
 import CitySearch from "./components/CitySearch";
 import EventList from "./components/EventList";
 import NumberOfEvents from "./components/NumberOfEvents";
+import CityEventsChart from "./components/CityEventsChart";
 
 import { useState, useEffect } from "react";
 import { extractLocations, getEvents } from "./api";
@@ -41,6 +42,7 @@ const App = () => {
 
   return (
     <div className="App" data-testid="App">
+      <h1>Meet App</h1>
       <div className="alerts-container">
         {infoAlert.length ? <InfoAlert text={infoAlert} /> : null}
 
@@ -57,6 +59,10 @@ const App = () => {
         currentNOE={currentNOE}
         setCurrentNOE={setCurrentNOE}
         setErrorAlert={setErrorAlert}
+      />
+      <CityEventsChart
+        allLocations={allLocations}
+        events={events}
       />
       <EventList events={events} />
     </div>
