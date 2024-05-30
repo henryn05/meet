@@ -93,7 +93,7 @@ input[type="number"] {
   cursor: pointer;
 }
 .details-btn:hover {
-  background-color: #0CC0DF;
+  background-color: #0ba6c1;
 }
 .charts-container {
   display: grid;
