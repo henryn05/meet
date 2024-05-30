@@ -93,5 +93,15 @@ input[type="number"] {
   cursor: pointer;
 }
 .details-btn:hover {
-  background-color: #0CC0DF;
+  background-color: #0ba6c1;
+}
+.charts-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+@media (max-width: 768px) {
+  .charts-container {
+    grid-template-columns: 1fr;
+  }
 }
