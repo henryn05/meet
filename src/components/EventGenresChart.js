@@ -1,4 +1,4 @@
-import { PieChart, Pie, ResponsiveContainer, Cell } from "recharts";
+import { PieChart, Pie, ResponsiveContainer, Cell, Legend } from "recharts";
 import { useState, useEffect } from "react";
 
 const EventGenresChart = ({ events }) => {
@@ -56,12 +56,11 @@ const EventGenresChart = ({ events }) => {
           label={renderCustomizedLabel}
           outerRadius={130}
         >
-          {
-            data.map((entry, index) => {
-              <Cell key={`cell-${index}`} fill={colors[index]}/>
-            })
-          }
+          {data.map((entry, index) => (
+            <Cell key={`cell-${index}`} fill={colors[index]}/>
+          ))}
         </Pie>
+        <Legend />
       </PieChart>
     </ResponsiveContainer>
   );
