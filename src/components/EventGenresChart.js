@@ -27,9 +27,9 @@ const EventGenresChart = ({ events }) => {
     ) : null;
   };
 
-  const [data, setData] = useState("");
+  const [data, setData] = useState([]);
   const genres = ["React", "JavaScript", "Node", "jQuery", "Angular"];
-  const colors = ["#14d5f7", "#0ba6c1", "#0b7b8f", "095663", "#052f36"];
+  const colors = ["#14d5f7", "#0ba6c1", "#0b7b8f", "#095663", "#052f36"];
 
   const getData = () => {
     const data = genres.map((genre) => {
@@ -44,7 +44,7 @@ const EventGenresChart = ({ events }) => {
 
   useEffect(() => {
     setData(getData());
-  }, [`${events}`]);
+  }, [events]);
 
   return (
     <ResponsiveContainer width="99%" height={400}>
