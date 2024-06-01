@@ -1,5 +1,15 @@
+## How Was This App Made?
+  This is a progressive web-application (PWA) built through test-driven development via Jest and Asastus.
 
-## User Stories
+  React components were mainly utilized and Recharts acted as a major dependency in showing data through pie-charts and scatterplots.
+## What Does This App Do?
+  Upon opening the PWA, users will be prompted login via a 3rd party authorization server (Google OAuth).
+  ![MeetApp OAuth](*)
+
+  After logging in, the user can search for events in specific cities and/or change the number of events showing from the output.
+
+  The pie chart and scatterplot will reflect composition of the data based on the user's input.
+  ![MeetApp Charts](./img/meet-app-charts.png)
 ### Scenario 1: Filter Events by City
   Given the user is on the main page
   When they apply a filter to show events in "New York"
