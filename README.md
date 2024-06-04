@@ -1,7 +1,7 @@
 ## How Was This App Made?
   This is a progressive web-application (PWA) built through test-driven development via Jest and Asastus.
 
-  React components were mainly utilized and Recharts acted as a major dependency in showing data through pie-charts and scatterplots.
+  React components were mainly utilized and Recharts acted as a major dependency in showing data through pie-charts and scatterplots. It's deployed through gh-pages here: https://henryn05.github.io/meet/
 ## What Does This App Do?
   Upon opening the PWA, users will be prompted login via a 3rd party authorization server (Google OAuth).
 
